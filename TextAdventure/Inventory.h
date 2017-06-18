@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <map>
-#include "Room.h"
 #include "Entity.h"
 
 class Inventory
@@ -12,7 +11,7 @@ public:
     Inventory();
     ~Inventory();
     Entity* GetItem(std::string item);
-    void AddItem(std::string item, Entity* entity);
+    void AddItem(std::string item, Entity* entity) __attribute__((deprecated));
     std::string GetItems();
 private:
   std::map<std::string, Entity*> inventory;

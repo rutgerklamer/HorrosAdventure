@@ -42,8 +42,6 @@ private:
     Player* player;
     std::string answer;
     int i;
-    int j;
-    int removeUnlock;
     Room* main;
     Room* janitorRoom;
     Room* canteen;

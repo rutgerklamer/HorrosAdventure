@@ -207,7 +207,6 @@ void Game::Unlock()
     if (returnedString == "north" || returnedString == "east" || returnedString == "south" || returnedString == "west") {
       player->GetRoom()->GetNeighbours(returnedString)->SetLocked(false);
       player->inventory->AddItem("Janitor keys", NULL);
-      commandword->removeCommand(removeUnlock);
       Textloader::loadText("../TextArt/UnlockedDoor.txt");
     }
   }
@@ -215,12 +214,10 @@ void Game::Unlock()
 
 void Game::Grab()
 {
-  Grab();
   if (player->GetRoom()->GetItem()->getItemName() == "Shovel") {
     commandword->pushCommand("dig");
   } else if (player->GetRoom()->GetItem()->getItemName() == "Janitor keys") {
     commandword->pushCommand("unlock");
-    removeUnlock = commandword->getLength();
   }
   player->GetRoom()->GetItem()->showItem();
   Print("I got it it looks to be : " + player->GetRoom()->GetItem()->getItemName());

@@ -11,6 +11,7 @@ Room::Room(std::string dis, std::string name, std::string fileloc)
   discription = dis;
   this->name = name;
   this->filelocation = fileloc;
+  inventory = new Inventory();
 }
 
 Room::~Room()
@@ -76,10 +77,14 @@ std::string Room::GetName()
 
 Entity* Room::GetItem()
 {
-  return item;
+  return inventory->GetItem("");
 }
 
 void Room::SetItem(Entity* entity)
 {
-  item = entity;
+  if (entity != 0) {
+    inventory->AddItem(entity->getItemName(), entity);
+  } else {
+    inventory->AddItem("", entity);
+  }
 }

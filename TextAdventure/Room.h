@@ -5,6 +5,8 @@
 #include <map>
 #include "Entity.h"
 #include "Textloader.h"
+#include "Inventory.h"
+
 class Room
 {
 public:
@@ -23,9 +25,8 @@ public:
     std::string getNeededKey();
     void setNeededKey(std::string key);
     void showRoom();
-
+    Inventory* inventory;
 private:
-  Entity* item;
   std::string discription;
   std::string name;
   std::string neededKey;
