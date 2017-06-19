@@ -18,15 +18,17 @@ Entity* Inventory::GetItem(std::string item)
     Entity* entity;
     std::map<std::string, Entity*>::iterator it = inventory.begin();
     while (it != inventory.end()) {
-      entity = inventory[it->first];
-      it = inventory.end();
+      if (inventory[it->first] != nullptr) {
+        entity = inventory[it->first];
+        it = inventory.end();
+      }
       return entity;
     }
   }
   return inventory[item];
 }
 
-void Inventory::AddItem(std::string item, Entity* entity) __attribute__((deprecated))
+void Inventory::AddItem(std::string item, Entity* entity)
 {
   std::cout << "Why am i getting called" << std::endl;
 

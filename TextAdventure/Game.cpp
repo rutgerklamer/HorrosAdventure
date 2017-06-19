@@ -52,20 +52,19 @@ void Game::MainLoop() {
     Grab();
   } else if (returnedString == "dig") {
     Dig();
-    return;
   } else if (returnedString == "unlock") {
     Unlock();
   } else if (returnedString == "north" || returnedString == "east" || returnedString == "south" || returnedString == "west") {
     WalkDirection(returnedString);
   } else {
-      Print("I don't know that command! \n Use 'help' If you are stuck!");
+    Print("I don't know that command! \n Use 'help' If you are stuck!");
   }
   MainLoop();
 }
 
 void Game::SpawnInfo()
 {
-  Print("Items: " + player->inventory->GetItems());
+  //Print("Items: " + player->inventory->GetItems());
   std::cout << player->GetHealth() << std::endl;
 }
 
@@ -125,7 +124,7 @@ void Game::SpawnRooms() {
 }
 
 void Game::PrintHelp(int i) {
-  std::cout << "DId it help?" << std::endl;
+  std::cout << "Did it help?" << std::endl;
 }
 
 void Game::SetTextColor(int colors)
