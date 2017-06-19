@@ -47,11 +47,13 @@ private:
     Room* canteen;
     Room* exitDoor;
     Room* classRoom;
+    Room* parkingLot;
   //  Command* command;
     CommandWords* commandword;
     Parser* parser;
     Shovel* shovel;
     Keys* janitorKeys;
+    Keys* carKeys;
 
 };
 

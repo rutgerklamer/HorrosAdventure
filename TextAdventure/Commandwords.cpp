@@ -17,6 +17,8 @@ CommandWords::CommandWords()
 	validCommands.push_back("west");
 	validCommands.push_back("north");
 	validCommands.push_back("south");
+  validCommands.push_back("dig");
+  validCommands.push_back("unlock");
 }
 
 CommandWords::~CommandWords()

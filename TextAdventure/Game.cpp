@@ -22,6 +22,7 @@ Game::~Game() {
   delete commandword;
   delete parser;
   delete canteen;
+  delete parkingLot;
   delete main;
   delete exitDoor;
   delete classRoom;
@@ -103,21 +104,29 @@ void Game::SpawnRooms() {
   exitDoor =
       new Room("This it the exit, It's looks like it's locked!", "The exit", "../TextArt/MainRoom.txt");
   classRoom = new Room("this is the classroom of Ms Puff", "The classroom", "../TextArt/MainRoom.txt");
+  parkingLot = new Room("This is the parking lot, it's surrounder by fences", "The parking lot", "../TextArt/MainRoom.txt");
 
   main->SetNeighbours("north", exitDoor);
   main->SetNeighbours("south", classRoom);
   main->SetNeighbours("west", canteen);
   main->SetNeighbours("east", janitorRoom);
+  parkingLot->SetNeighbours("east", exitDoor);
+  parkingLot->SetNeighbours("south", canteen);
 
   janitorRoom->SetNeighbours("west", main);
   canteen->SetNeighbours("east", main);
+  canteen->SetNeighbours("north", parkingLot);
   exitDoor->SetNeighbours("south", main);
+  exitDoor->SetNeighbours("west", parkingLot);
   classRoom->SetNeighbours("north", main);
 
   janitorKeys = new Keys("Janitor keys", "../TextArt/Keys.txt");
   main->SetItem(janitorKeys);
   shovel = new Shovel("Shovel", "../TextArt/Shovel.txt");
   janitorRoom->SetItem(shovel);
+
+  carKeys = new Keys("Car Keys", "../TextArt/Keys.txt");
+  parkingLot->SetItem(carKeys);
 
   janitorRoom->SetLocked(true);
   janitorRoom->setNeededKey("Janitor keys");
@@ -204,20 +213,19 @@ void Game::Unlock()
   std::string returnedString = parser->getCommand(commandword);
   if (returnedString != "No command found" ) {
     if (returnedString == "north" || returnedString == "east" || returnedString == "south" || returnedString == "west") {
-      player->GetRoom()->GetNeighbours(returnedString)->SetLocked(false);
-      player->inventory->AddItem("Janitor keys", NULL);
-      Textloader::loadText("../TextArt/UnlockedDoor.txt");
+      if (player->GetRoom()->GetNeighbours(returnedString)->GetLocked()) {
+        player->GetRoom()->GetNeighbours(returnedString)->SetLocked(false);
+        player->inventory->AddItem("Janitor keys", NULL);
+        Textloader::loadText("../TextArt/UnlockedDoor.txt");
+      } else {
+        Print("This room isn't locked.");
+      }
     }
   }
 }
 
 void Game::Grab()
 {
-  if (player->GetRoom()->GetItem()->getItemName() == "Shovel") {
-    commandword->pushCommand("dig");
-  } else if (player->GetRoom()->GetItem()->getItemName() == "Janitor keys") {
-    commandword->pushCommand("unlock");
-  }
   player->GetRoom()->GetItem()->showItem();
   Print("I got it it looks to be : " + player->GetRoom()->GetItem()->getItemName());
   player->inventory->AddItem(player->GetRoom()->GetItem()->getItemName(), player->GetRoom()->GetItem());
