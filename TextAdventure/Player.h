@@ -15,7 +15,8 @@ public:
     void Start();
     int GetHealth();
     bool IsAlive();
-    void SetHealth(int hp);
+    void Damage(int hp);
+    void Heal(int hp);
     std::string GetName();
     Inventory* inventory;
 private:

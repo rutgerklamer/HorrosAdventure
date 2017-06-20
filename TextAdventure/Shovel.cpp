@@ -23,7 +23,7 @@ std::string Shovel::getItemName()
 
 void Shovel::ShowItem()
 {
-  Textloader::loadText(this->filelocation);
+  Textloader::LoadText(this->filelocation);
 }
 
 int Shovel::GetHP()

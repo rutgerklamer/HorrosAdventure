@@ -12,7 +12,7 @@ public:
 	virtual ~Parser();
 
 	std::string GetCommand(CommandWords* commands);
-	void ShowCommands() { commands.showAll(); }
+	void ShowCommands() { commands.ShowAll(); }
 
 private:
 	CommandWords commands;

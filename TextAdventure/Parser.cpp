@@ -41,7 +41,7 @@ std::string Parser::GetCommand(CommandWords* commands) {
 
 	if (words.size() == 0) { return words[0]; } // list is empty
 
-	if(commands->isCommand(words[0])) {
+	if(commands->IsCommand(words[0])) {
 		// check words and return command
 		if (words.size() > 1) { return words[1]; } // there is a second word
 		if (words.size() > 0) { return words[0]; } // there is a single command word

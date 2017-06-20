@@ -35,7 +35,7 @@ Entity* Inventory::GetItem(std::string item)
 
 void Inventory::AddItem(std::string item, Entity* entity)
 {
-  if (currentWeight + entity->getWeight() <= weightLimit) {
+  if (currentWeight + entity->GetWeight() <= weightLimit) {
     inventory[item] = entity;
   }
   else {
@@ -50,7 +50,7 @@ std::string Inventory::GetItems()
    while (it != inventory.end()) {
      Entity* entity = inventory[it->first];
      if (entity != nullptr) {
-       items += " " + entity->getItemName() + " \n";
+       items += " " + entity->GetItemName() + " \n";
      }
      it++;
    }

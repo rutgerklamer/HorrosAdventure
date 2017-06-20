@@ -27,7 +27,7 @@ CommandWords::~CommandWords()
 
 }
 
-std::string CommandWords::getCommands()
+std::string CommandWords::GetCommands()
 {
 	std::string string;
 	for (int i = 0; i < validCommands.size(); i++)
@@ -40,23 +40,23 @@ std::string CommandWords::getCommands()
 	return string;
 }
 
-void CommandWords::pushCommand(std::string command)
+void CommandWords::PushCommand(std::string command)
 {
 	validCommands.push_back(command);
 }
 
-void CommandWords::removeCommand(int i)
+void CommandWords::RemoveCommand(int i)
 {
 	validCommands.erase(validCommands.begin() + i);
 }
 
-int CommandWords::getLength()
+int CommandWords::GetLength()
 {
 	return validCommands.size();
 }
 
 
-bool CommandWords::isCommand(std::string str)
+bool CommandWords::IsCommand(std::string str)
 {
 	for (size_t i = 0; i < validCommands.size(); i++) {
 		if (validCommands[i].compare(str) == 0) {

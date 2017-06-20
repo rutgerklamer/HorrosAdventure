@@ -38,7 +38,7 @@ int Player::GetHealth()
   return health;
 }
 
-void Player::SetHealth(int hp)
+void Player::Damage(int hp)
 {
   this->health -= hp;
   if (this->health < 0)
@@ -46,6 +46,13 @@ void Player::SetHealth(int hp)
     this->isDead = true;
   }
 }
+
+
+void Player::Heal(int hp)
+{
+  this->health += hp;
+}
+
 
 bool Player::IsAlive()
 {

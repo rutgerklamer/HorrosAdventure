@@ -10,12 +10,12 @@ class CommandWords
 public:
 	CommandWords();
 	virtual ~CommandWords();
-	void pushCommand(std::string command);
-	void removeCommand(int i);
-	int getLength();
-	std::string getCommands();
-	bool isCommand(std::string);
-	void showAll() {
+	void PushCommand(std::string command);
+	void RemoveCommand(int i);
+	int GetLength();
+	std::string GetCommands();
+	bool IsCommand(std::string);
+	void ShowAll() {
         for(int i = 0; i < validCommands.size(); i++) {
             std::cout << validCommands[i] << " ";
         }

@@ -15,7 +15,7 @@ Room::~Room()
 
 void Room::ShowRoom()
 {
-  Textloader::loadText(this->filelocation);
+  Textloader::LoadText(this->filelocation);
 }
 
 std::string Room::GetNeededKey()
