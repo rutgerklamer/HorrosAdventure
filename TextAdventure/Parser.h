@@ -11,8 +11,8 @@ public:
 	Parser();
 	virtual ~Parser();
 
-	std::string getCommand(CommandWords* commands);
-	void showCommands() { commands.showAll(); }
+	std::string GetCommand(CommandWords* commands);
+	void ShowCommands() { commands.showAll(); }
 
 private:
 	CommandWords commands;

@@ -12,9 +12,9 @@ public:
     ~Shovel();
     std::string getItemName();
     void PrintName();
-    void showItem();
-    int getHP();
-    int getWeight();
+    void ShowItem();
+    int GetHP();
+    int GetWeight();
 private:
   int health = 100;
   int weight = 2;

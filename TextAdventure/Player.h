@@ -14,9 +14,9 @@ public:
     void SetRoom(Room* room);
     void Start();
     int GetHealth();
-    bool isAlive();
-    void setHealth(int hp);
-    std::string getName();
+    bool IsAlive();
+    void SetHealth(int hp);
+    std::string GetName();
     Inventory* inventory;
 private:
   std::string name;

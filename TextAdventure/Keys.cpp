@@ -16,22 +16,22 @@ void Keys::PrintName()
   std::cout << "Keys" << std::endl;
 }
 
-std::string Keys::getItemName()
+std::string Keys::GetItemName()
 {
   return this->itemName;
 }
 
-void Keys::showItem()
+void Keys::ShowItem()
 {
   Textloader::loadText(this->filelocation);
 }
 
-int Keys::getHP()
+int Keys::GetHP()
 {
   return this->health;
 }
 
-int Keys::getWeight()
+int Keys::GetWeight()
 {
   return this->weight;
 }

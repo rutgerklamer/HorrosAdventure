@@ -265,7 +265,7 @@ void Game::Quit()
   }
 }
 
-void Game::showInventory()
+void Game::ShowInventory()
 {
   Print(player->inventory->GetItems());
 }

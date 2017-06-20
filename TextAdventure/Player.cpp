@@ -18,7 +18,7 @@ void Player::Start()
   std::getline(std::cin, name);
 }
 
-std::string Player::getName()
+std::string Player::GetName()
 {
   return name;
 }
@@ -38,7 +38,7 @@ int Player::GetHealth()
   return health;
 }
 
-void Player::setHealth(int hp)
+void Player::SetHealth(int hp)
 {
   this->health -= hp;
   if (this->health < 0)
@@ -47,7 +47,7 @@ void Player::setHealth(int hp)
   }
 }
 
-bool Player::isAlive()
+bool Player::IsAlive()
 {
   return this->isDead;
 }

@@ -37,7 +37,7 @@ public:
     void Unlock();
     void Grab();
     void Quit();
-    void showInventory();
+    void ShowInventory();
     void Drop();
     Game* GetGame();
 private:

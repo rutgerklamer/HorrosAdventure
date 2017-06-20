@@ -19,9 +19,9 @@ public:
     std::string GetDirections();
     bool GetLocked();
     void SetLocked(bool locking);
-    std::string getNeededKey();
-    void setNeededKey(std::string key);
-    void showRoom();
+    std::string GetNeededKey();
+    void SetNeededKey(std::string key);
+    void ShowRoom();
     Inventory* inventory;
 private:
   std::string discription;

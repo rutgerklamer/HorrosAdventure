@@ -18,7 +18,7 @@ Parser::~Parser()
 }
 
 
-std::string Parser::getCommand(CommandWords* commands) {
+std::string Parser::GetCommand(CommandWords* commands) {
 	// display command prompt
 	std::cout << "> ";
 

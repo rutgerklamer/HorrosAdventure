@@ -13,17 +13,17 @@ Room::~Room()
 
 }
 
-void Room::showRoom()
+void Room::ShowRoom()
 {
   Textloader::loadText(this->filelocation);
 }
 
-std::string Room::getNeededKey()
+std::string Room::GetNeededKey()
 {
   return this->neededKey;
 }
 
-void Room::setNeededKey(std::string key)
+void Room::SetNeededKey(std::string key)
 {
   this->neededKey = key;
 }

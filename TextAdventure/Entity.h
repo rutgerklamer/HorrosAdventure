@@ -8,11 +8,11 @@ class Entity
 public:
     Entity(std::string string);
     ~Entity();
-    std::string getItemName();
+    std::string GetItemName();
     virtual void PrintName();
-    virtual void showItem();
-    virtual int getWeight();
-    virtual int getHP();
+    virtual void ShowItem();
+    virtual int GetWeight();
+    virtual int GetHP();
 private:
   std::string itemName;
 };

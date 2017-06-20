@@ -9,7 +9,7 @@ class Textloader
 public:
     Textloader();
     ~Textloader();
-    static void loadText(std::string textlocation);
+    static void LoadText(std::string textlocation);
 private:
 };
 

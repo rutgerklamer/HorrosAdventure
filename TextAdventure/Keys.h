@@ -10,11 +10,11 @@ class Keys : public Entity
 public:
     Keys(std::string string, std::string fileloc);
     ~Keys();
-    std::string getItemName();
+    std::string GetItemName();
     void PrintName();
-    void showItem();
-    int getHP();
-    int getWeight();
+    void ShowItem();
+    int GetHP();
+    int GetWeight();
 private:
   int health = 100;
   int weight = 1;

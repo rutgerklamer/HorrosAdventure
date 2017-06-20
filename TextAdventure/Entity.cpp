@@ -10,12 +10,12 @@ Entity::~Entity()
 
 }
 
-int Entity::getHP()
+int Entity::GetHP()
 {
 
 }
 
-int Entity::getWeight()
+int Entity::GetWeight()
 {
 
 }
@@ -26,12 +26,12 @@ void Entity::PrintName()
 }
 
 
-std::string Entity::getItemName()
+std::string Entity::GetItemName()
 {
   return this->itemName;
 }
 
-void Entity::showItem()
+void Entity::ShowItem()
 {
 
 }

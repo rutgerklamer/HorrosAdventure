@@ -11,7 +11,7 @@ Textloader::~Textloader()
 
 }
 
- void Textloader::loadText(std::string textlocation)
+ void Textloader::LoadText(std::string textlocation)
 {
   const char *filename = textlocation.c_str();
      FILE *fptr = NULL;

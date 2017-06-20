@@ -21,17 +21,17 @@ std::string Shovel::getItemName()
   return this->itemName;
 }
 
-void Shovel::showItem()
+void Shovel::ShowItem()
 {
   Textloader::loadText(this->filelocation);
 }
 
-int Shovel::getHP()
+int Shovel::GetHP()
 {
   return this->health;
 }
 
-int Shovel::getWeight()
+int Shovel::GetWeight()
 {
   return this->weight;
 }
