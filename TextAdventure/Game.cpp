@@ -97,7 +97,7 @@ void Game::WalkDirection(std::string dir) {
 }
 
 void Game::Intro() {
-//  Textloader::loadText("../TextArt/Intro.txt");
+  Textloader::loadText("../TextArt/Intro.txt");
   i = 1;
   GetAge();
 }
@@ -148,7 +148,7 @@ void Game::SpawnRooms() {
 }
 
 void Game::PrintHelp(int i) {
-  std::cout << "Did it help?" << std::endl;
+  std::cout << commandword->getCommands() << std::endl;
 }
 
 void Game::SetTextColor(int colors)

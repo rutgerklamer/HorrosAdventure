@@ -28,7 +28,7 @@ Textloader::~Textloader()
     while(fgets(read_string,sizeof(read_string),fptr) != NULL) {
       if ((read_string)[0] == 's' && (read_string)[1] == 'l' && (read_string)[2] == 'p') {
         for (int i = 0; i < removeLines; i++) {
-          std::cout << "\e[A";
+        //  std::cout << "\e[A";
           removeLines = 0;
         }
         Game::Sleep((read_string[3] - '0') * (read_string[4] - '0') * (10 * (read_string[5] - '0')));
