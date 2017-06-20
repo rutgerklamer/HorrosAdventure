@@ -11,6 +11,7 @@ public:
     std::string getItemName();
     virtual void PrintName();
     virtual void showItem();
+    virtual int getWeight();
     virtual int getHP();
 private:
   std::string itemName;

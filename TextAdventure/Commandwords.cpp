@@ -19,6 +19,7 @@ CommandWords::CommandWords()
 	validCommands.push_back("south");
   validCommands.push_back("dig");
   validCommands.push_back("unlock");
+  validCommands.push_back("drop");
 }
 
 CommandWords::~CommandWords()

@@ -14,8 +14,10 @@ public:
     void PrintName();
     void showItem();
     int getHP();
+    int getWeight();
 private:
   int health = 100;
+  int weight = 2;
   std::string itemName;
   std::string filelocation;
 };

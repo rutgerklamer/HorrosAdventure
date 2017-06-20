@@ -25,3 +25,13 @@ void Keys::showItem()
 {
   Textloader::loadText(this->filelocation);
 }
+
+int Keys::getHP()
+{
+  return this->health;
+}
+
+int Keys::getWeight()
+{
+  return this->weight;
+}

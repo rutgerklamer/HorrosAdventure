@@ -37,6 +37,8 @@ public:
     void Unlock();
     void Grab();
     void Quit();
+    void showInventory();
+    void Drop();
     Game* GetGame();
 private:
     Player* player;
@@ -48,6 +50,7 @@ private:
     Room* exitDoor;
     Room* classRoom;
     Room* parkingLot;
+    Room* basement;
   //  Command* command;
     CommandWords* commandword;
     Parser* parser;

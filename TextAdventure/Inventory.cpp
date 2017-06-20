@@ -3,7 +3,7 @@
 
 Inventory::Inventory()
 {
-
+  this->weightLimit = 4;
 }
 
 Inventory::~Inventory()
@@ -11,18 +11,23 @@ Inventory::~Inventory()
 
 }
 
+void Inventory::RemoveItem(std::string item)
+{
+  inventory[item] = NULL;
+}
+
 Entity* Inventory::GetItem(std::string item)
 {
   if (item == "")
   {
-    Entity* entity;
     std::map<std::string, Entity*>::iterator it = inventory.begin();
     while (it != inventory.end()) {
-      if (inventory[it->first] != nullptr) {
-        entity = inventory[it->first];
+      Entity* entity = inventory[it->first];
+      if (entity != nullptr) {
         it = inventory.end();
+        return entity;
       }
-      return entity;
+      it++;
     }
   }
   return inventory[item];
@@ -30,9 +35,12 @@ Entity* Inventory::GetItem(std::string item)
 
 void Inventory::AddItem(std::string item, Entity* entity)
 {
-  std::cout << "Why am i getting called" << std::endl;
-
-  inventory[item] = entity;
+  if (currentWeight + entity->getWeight() <= weightLimit) {
+    inventory[item] = entity;
+  }
+  else {
+    Game::Print("Your inventory is full!");
+  }
 }
 
 std::string Inventory::GetItems()
@@ -41,8 +49,10 @@ std::string Inventory::GetItems()
    std::map<std::string, Entity*>::iterator it = inventory.begin();
    while (it != inventory.end()) {
      Entity* entity = inventory[it->first];
-     items += " " + entity->getItemName() + " ";
-     ++it;
+     if (entity != nullptr) {
+       items += " " + entity->getItemName() + " \n";
+     }
+     it++;
    }
    return items;
 }

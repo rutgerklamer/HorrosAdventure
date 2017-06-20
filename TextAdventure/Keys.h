@@ -13,7 +13,11 @@ public:
     std::string getItemName();
     void PrintName();
     void showItem();
+    int getHP();
+    int getWeight();
 private:
+  int health = 100;
+  int weight = 1;
   std::string itemName;
   std::string filelocation;
 };

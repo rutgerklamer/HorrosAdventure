@@ -1,11 +1,5 @@
 #include "Room.h"
 
-#define up 0
-#define down 1
-#define left  2
-#define right 3
-
-
 Room::Room(std::string dis, std::string name, std::string fileloc)
 {
   discription = dis;
@@ -73,18 +67,4 @@ std::string Room::GetDiscription()
 std::string Room::GetName()
 {
   return name;
-}
-
-Entity* Room::GetItem()
-{
-  return inventory->GetItem("");
-}
-
-void Room::SetItem(Entity* entity)
-{
-  if (entity != 0) {
-    inventory->AddItem(entity->getItemName(), entity);
-  } else {
-    inventory->AddItem("", entity);
-  }
 }

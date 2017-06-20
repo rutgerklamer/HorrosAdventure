@@ -3,7 +3,6 @@
 Entity::Entity(std::string string)
 {
   this->itemName = string;
-
 }
 
 Entity::~Entity()
@@ -13,11 +12,17 @@ Entity::~Entity()
 
 int Entity::getHP()
 {
+
+}
+
+int Entity::getWeight()
+{
+
 }
 
 void Entity::PrintName()
 {
-  std::cout << "Entity" << std::endl;
+
 }
 
 

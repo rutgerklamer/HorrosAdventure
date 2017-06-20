@@ -16,9 +16,6 @@ public:
     Room* GetNeighbours(std::string dir);
     std::string GetDiscription();
     std::string GetName();
-    void SetItem(Entity* entity);
-    Entity* GetItem();
-    void AddItem(std::string item);
     std::string GetDirections();
     bool GetLocked();
     void SetLocked(bool locking);

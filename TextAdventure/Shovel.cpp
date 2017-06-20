@@ -30,3 +30,8 @@ int Shovel::getHP()
 {
   return this->health;
 }
+
+int Shovel::getWeight()
+{
+  return this->weight;
+}

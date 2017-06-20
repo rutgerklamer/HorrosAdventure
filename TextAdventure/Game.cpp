@@ -49,13 +49,17 @@ void Game::MainLoop() {
     ShowRoom();
   } else if (returnedString == "look") {
     Look();
-  } else if (returnedString == "grab" && i == 3 && player->GetRoom()->GetItem()) {
+  } else if (returnedString == "grab" && player->GetRoom()->inventory->GetItem("")) {
     Grab();
   } else if (returnedString == "dig") {
     Dig();
+  } else if (returnedString == "drop") {
+    Drop();
   } else if (returnedString == "unlock") {
     Unlock();
-  } else if (returnedString == "north" || returnedString == "east" || returnedString == "south" || returnedString == "west") {
+  } else if (returnedString == "inventory" ){
+    showInventory();
+  } else if (returnedString == "north" || returnedString == "east" || returnedString == "south" || returnedString == "west" || returnedString == "up") {
     WalkDirection(returnedString);
   } else {
     Print("I don't know that command! \n Use 'help' If you are stuck!");
@@ -65,22 +69,29 @@ void Game::MainLoop() {
 
 void Game::SpawnInfo()
 {
-  //Print("Items: " + player->inventory->GetItems());
+  if (player->isAlive())
+  {
+    Print("Oh no you have died");
+    Sleep(1000);
+    Game::Exit(this);
+  }
+  Print("Items: " + player->inventory->GetItems());
   std::cout << player->GetHealth() << std::endl;
 }
 
 void Game::WalkDirection(std::string dir) {
+  if (player->GetRoom()->GetNeighbours(dir)->GetName() == "The janitor's room" && dir == "east")
+  {
+    player->SetRoom(basement);
+    player->setHealth(20);
+    Print("You have gone to the basement but have fallen down!");
+    Print("You have hit your head on the ground and you are bleeding even more now!");
+  }
   if (player->GetRoom()->GetNeighbours(dir) != 0 && !player->GetRoom()->GetNeighbours(dir)->GetLocked()) {
     player->SetRoom(player->GetRoom()->GetNeighbours(dir));
     Print("You have gone " + dir + " to the: " + player->GetRoom()->GetName());
     player->setHealth(10);
-    if (player->isAlive())
-    {
-      Print("Oh no you have died");
-      Sleep(1000);
-      Game::Exit(this);
-    }
-  } else   if (player->GetRoom()->GetNeighbours(dir) != 0 && player->GetRoom()->GetNeighbours(dir)->GetLocked()) {
+  } else if (player->GetRoom()->GetNeighbours(dir) != 0 && player->GetRoom()->GetNeighbours(dir)->GetLocked()) {
     Textloader::loadText("../TextArt/LockedDoor.txt");
   }
 }
@@ -105,15 +116,19 @@ void Game::SpawnRooms() {
       new Room("This it the exit, It's looks like it's locked!", "The exit", "../TextArt/MainRoom.txt");
   classRoom = new Room("this is the classroom of Ms Puff", "The classroom", "../TextArt/MainRoom.txt");
   parkingLot = new Room("This is the parking lot, it's surrounder by fences", "The parking lot", "../TextArt/MainRoom.txt");
+  basement = new Room("This is the basement, it's very dark and stinky in here", "The basement", "../TextArt/MainRoom.txt");
 
   main->SetNeighbours("north", exitDoor);
   main->SetNeighbours("south", classRoom);
   main->SetNeighbours("west", canteen);
   main->SetNeighbours("east", janitorRoom);
+  basement->SetNeighbours("up", janitorRoom);
   parkingLot->SetNeighbours("east", exitDoor);
   parkingLot->SetNeighbours("south", canteen);
 
   janitorRoom->SetNeighbours("west", main);
+  janitorRoom->SetNeighbours("down", basement);
+
   canteen->SetNeighbours("east", main);
   canteen->SetNeighbours("north", parkingLot);
   exitDoor->SetNeighbours("south", main);
@@ -121,12 +136,12 @@ void Game::SpawnRooms() {
   classRoom->SetNeighbours("north", main);
 
   janitorKeys = new Keys("Janitor keys", "../TextArt/Keys.txt");
-  main->SetItem(janitorKeys);
+  main->inventory->AddItem(janitorKeys->getItemName(), janitorKeys);
   shovel = new Shovel("Shovel", "../TextArt/Shovel.txt");
-  janitorRoom->SetItem(shovel);
+  janitorRoom->inventory->AddItem(shovel->getItemName(), shovel);
 
   carKeys = new Keys("Car Keys", "../TextArt/Keys.txt");
-  parkingLot->SetItem(carKeys);
+  main->inventory->AddItem(carKeys->getItemName(), carKeys);
 
   janitorRoom->SetLocked(true);
   janitorRoom->setNeededKey("Janitor keys");
@@ -198,10 +213,10 @@ void Game::ShowRoom()
 
 void Game::Look()
 {
-  if (player->GetRoom()->GetItem() != nullptr) {
+  if (player->GetRoom()->inventory->GetItem("") != nullptr) {
     commandword->pushCommand("grab");
     if (!player->inventory->GetItem("Shovel")) { i = 3; }
-    player->GetRoom()->GetItem()->showItem();
+    player->GetRoom()->inventory->GetItem("")->showItem();
   } else {
    Print("There's nothing here.");
   }
@@ -214,9 +229,11 @@ void Game::Unlock()
   if (returnedString != "No command found" ) {
     if (returnedString == "north" || returnedString == "east" || returnedString == "south" || returnedString == "west") {
       if (player->GetRoom()->GetNeighbours(returnedString)->GetLocked()) {
-        player->GetRoom()->GetNeighbours(returnedString)->SetLocked(false);
-        player->inventory->AddItem("Janitor keys", NULL);
-        Textloader::loadText("../TextArt/UnlockedDoor.txt");
+        std::string neededKey = player->GetRoom()->GetNeighbours(returnedString)->getNeededKey();
+        if (player->inventory->GetItem(neededKey) != 0) {
+          player->GetRoom()->GetNeighbours(returnedString)->SetLocked(false);
+          Textloader::loadText("../TextArt/UnlockedDoor.txt");
+        }
       } else {
         Print("This room isn't locked.");
       }
@@ -226,10 +243,11 @@ void Game::Unlock()
 
 void Game::Grab()
 {
-  player->GetRoom()->GetItem()->showItem();
-  Print("I got it it looks to be : " + player->GetRoom()->GetItem()->getItemName());
-  player->inventory->AddItem(player->GetRoom()->GetItem()->getItemName(), player->GetRoom()->GetItem());
-  player->GetRoom()->SetItem(0);
+  //player->GetRoom()->GetItem()->showItem();
+  Print("I got it it looks to be : " + player->GetRoom()->inventory->GetItem("")->getItemName());
+  player->inventory->AddItem(player->GetRoom()->inventory->GetItem("")->getItemName(), player->GetRoom()->inventory->GetItem(""));
+  Entity* entity = player->GetRoom()->inventory->GetItem("");
+  player->GetRoom()->inventory->RemoveItem(entity->getItemName());
 }
 
 void Game::Quit()
@@ -244,5 +262,24 @@ void Game::Quit()
     Exit(this);
   } else {
     MainLoop();
+  }
+}
+
+void Game::showInventory()
+{
+  Print(player->inventory->GetItems());
+}
+
+void Game::Drop()
+{
+  Print("What item do you want to drop?");
+  std::string returnedString;
+  std::getline(std::cin, returnedString);
+  if (player->inventory->GetItem(returnedString) != NULL) {
+    player->GetRoom()->inventory->AddItem(player->inventory->GetItem(returnedString)->getItemName(), player->inventory->GetItem(returnedString));
+    player->inventory->RemoveItem(returnedString);
+    Print(returnedString + "Has now been dropped");
+  } else {
+    Print("This item isn't in your inventory");
   }
 }
