@@ -20,6 +20,7 @@ CommandWords::CommandWords()
   validCommands.push_back("dig");
   validCommands.push_back("unlock");
   validCommands.push_back("drop");
+  validCommands.push_back("grab");
 }
 
 CommandWords::~CommandWords()

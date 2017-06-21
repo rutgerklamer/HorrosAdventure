@@ -107,16 +107,16 @@ void Game::Print(std::string text) {
 }
 
 void Game::SpawnRooms() {
-  main = new Room("Your start place. It's theh main hall, connected to every room",
+  main = new Room("Your start place. It's the main hall, connected to every room",
                   "The main hall", "../TextArt/MainRoom.txt");
   janitorRoom = new Room("this is the janitor room, I wonder what is in here.",
-                         "The janitor's room", "../TextArt/MainRoom.txt");
+                         "The janitor's room", "../TextArt/JanitorRoom.txt");
   canteen = new Room("This is the canteen's kitchen", "The canteen's kitchen", "../TextArt/Kitchen.txt");
   exitDoor =
-      new Room("This it the exit, It's looks like it's locked!", "The exit", "../TextArt/MainRoom.txt");
-  classRoom = new Room("this is the classroom of Ms Puff", "The classroom", "../TextArt/MainRoom.txt");
-  parkingLot = new Room("This is the parking lot, it's surrounder by fences", "The parking lot", "../TextArt/MainRoom.txt");
-  basement = new Room("This is the basement, it's very dark and stinky in here", "The basement", "../TextArt/MainRoom.txt");
+      new Room("This it the exit, It's looks like it's locked!", "The exit", "../TextArt/ExitDoor.txt");
+  classRoom = new Room("this is the classroom of Ms Puff", "The classroom", "../TextArt/ClassRoom.txt");
+  parkingLot = new Room("This is the parking lot, it's surrounder by fences", "The parking lot", "../TextArt/ParkingLot.txt");
+  basement = new Room("This is the basement, it's very dark and stinky in here", "The basement", "../TextArt/Basement.txt");
 
   main->SetNeighbours("north", exitDoor);
   main->SetNeighbours("south", classRoom);
@@ -214,7 +214,6 @@ void Game::ShowRoom()
 void Game::Look()
 {
   if (player->GetRoom()->inventory->GetItem("") != nullptr) {
-    commandword->PushCommand("grab");
     if (!player->inventory->GetItem("Shovel")) { i = 3; }
     player->GetRoom()->inventory->GetItem("")->ShowItem();
   } else {
